@@ -1,0 +1,137 @@
+<!--
+/**
+ * E-Commerce Dashboard
+ *
+ * @version     1.0.0
+ * @author      Johnde
+ * @copyright   2024 JohnDev19
+ * @license     MIT License
+ *
+ * Description:
+ * This is a web application for an e-commerce dashboard
+ * that allows users to browse products, manage a shopping cart,
+ * and view order details. It features a responsive design and
+ * user-friendly interface.
+ *
+ * Features:
+ * - Product browsing functionality
+ * - Shopping cart management
+ * - User authentication
+ * - Responsive design
+ * - Order history and details
+ *
+ * Technologies:
+ * - HTML5
+ * - CSS3
+ * - JavaScript (ES6+)
+ * - Vue.js (2.x)
+ * - Font Awesome (for icons)
+ *
+ * Last updated: November 2024
+ */
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <div class="hamburger" onclick="toggleSidebar()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <h1>E-Commerce</h1>
+        </div>
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Search products..." v-model="searchQuery">
+        </div>
+        <div class="user-profile">
+            <img src="img/137758073.jpeg" alt="JohnDev19" @click="toggleDropdown">
+            <div class="user-dropdown" :class="{ active: dropdownVisible }">
+                <a href="#"><i class="fas fa-user"></i>Profile</a>
+                <a href="#"><i class="fas fa-cog"></i>Settings</a>
+                <a href="#"><i class="fas fa-bell"></i>Notifications</a>
+                <a href="#"><i class="fas fa-sign-out-alt"></i>Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="sidebar" id="sidebar">
+        <a href="#" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Products</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-shopping-cart"></i>
+            <span>Orders</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Customers</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span>Analytics</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+        </a>
+    </div>
+
+    <div class="container" id="app">
+        <div class="products">
+            <div class="product" v-for="product in filteredProducts" :key="product.id">
+                <img :src="product.image" :alt="product.name">
+                <div class="product-content">
+                    <h2>{{ product.name }}</h2>
+                    <p>{{ product.description }}</p>
+                    <div class="price">${{ product.price.toFixed(2) }}</div>
+                    <button class="add-to-cart" @click="addToCart(product)">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart" :class="{ active: cartVisible }">
+    <div class="cart-header">
+        <h2>Shopping Cart</h2>
+        <button @click="toggleCart"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items">
+        <div class="cart-item" v-for="item in cart" :key="item.id">
+            <img :src="item.image" :alt="item.name">
+            <div class="cart-item-details">
+                <h3>{{ item.name }}</h3>
+                <p>${{ item.price.toFixed(2) }}</p>
+            </div>
+            <button @click="removeFromCart(item)">
+                <i class="fas fa-trash"></i>
+            </button>
+        </div>
+    </div>
+    <div class="cart-total">
+        <h3>Total: ${{ total.toFixed(2) }}</h3>
+        <button class="add-to-cart">
+            <i class="fas fa-credit-card"></i>
+            Proceed to Checkout
+        </button>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="script.js"></script>
+</body>
+</html>
