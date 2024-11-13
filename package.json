@@ -1,0 +1,13 @@
+{
+  "name": "e-commerce-dashboard",
+  "version": "1.0.0",
+  "description": "A web application for an e-commerce dashboard.",
+  "main": "main.py",
+  "scripts": {
+    "start": "python main.py"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "author": "JohnDev19",
+  "license": "MIT"
+}
